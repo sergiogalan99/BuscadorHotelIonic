@@ -41,5 +41,4 @@ export class ResultadoPage implements OnInit {
   public get arrayHoteles() {
     return this._arrayHoteles;
   }
- 
 }
