@@ -5,4 +5,33 @@
 </ion-header>
 
 <ion-content>
+
+  <ion-button routerLink="/home">
+    <ion-icon slot="start" name="arrow-back"></ion-icon>
+  </ion-button>
+  
+    {{seleccionDebug}}
+     
+
+ 
+
+
+  <ion-card  class="cardHoteles"*ngFor="let hoteles of arrayHoteles">
+     
+    <ion-card-header>
+      
+      <ion-card-title>{{hoteles.nombre}}</ion-card-title>
+      <ion-card-subtitle>{{hoteles.categoria}}</ion-card-subtitle>
+      
+    </ion-card-header>
+  
+     <ion-card-content  *ngFor="let habitacion of hoteles.tiposHabitacion">
+        
+     <img class="imagenHabitacion" src="{{habitacion.imagen}}">
+     
+    </ion-card-content>
+    <ion-button fill="outline">View</ion-button> 
+  </ion-card>
+
+
 </ion-content>
