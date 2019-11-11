@@ -6,8 +6,7 @@ import { Seleccion } from './../core/model/seleccion';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Habitacion } from '../core/model/habitacion';
-import { filter } from 'minimatch';
-import { from } from 'rxjs';
+import { PeticionControllerService } from '../shared/peticion-controller.service';
 
 @Component({
   selector: 'app-resultado',
@@ -18,22 +17,19 @@ export class ResultadoPage implements OnInit {
   seleccionDebug;
   public _seleccion: Seleccion;
   public _arrayHoteles: Hotel[];
-
-  fil: Hotel[];
-
-
+  private _arrayHabitacion: Habitacion[];
+  private result
 
 
-  constructor(private router: Router) {
 
-    this._seleccion = this.router.getCurrentNavigation().extras.state.seleccion;
+
+  constructor(public router: Router, public peticionService: PeticionControllerService) {
+
     this._arrayHoteles = this.router.getCurrentNavigation().extras.state.hoteles;
-    console.log(this._arrayHoteles);
-    console.log(this._seleccion);
+    // console.log(this._arrayHoteles[0].categoria);
+    // this.result = this._arrayHoteles.filter(habitacion =>  habitacion.categoria === this._seleccion.categoria);
+    // console.log(this.result);
 
-    this.seleccionDebug = JSON.stringify(this._seleccion);
-    for (let i = 0; i < this._arrayHoteles.length; i++) {
-      if (this._arrayHoteles[i].categoria == '⭐'){
 
       }
 
