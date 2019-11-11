@@ -1,3 +1,4 @@
+import { Habitacion } from './../core/model/habitacion';
 import { GeneradorHoteles } from './../core/model/generador-hoteles';
 import { Hotel } from './../core/model/hotel';
 import { Seleccion } from './../core/model/seleccion';
@@ -15,26 +16,27 @@ import { Router, NavigationExtras } from '@angular/router';
 
 })
 export class HomePage {
+
   private _arrayCategoria = [];
   private _arrayCamas = [];
   private _arrayCapacidad = [];
   private _arrayExtras = [];
-  private _maxSellable = 100;
-  private _precioMin = 50;
-  seleccionCategoria;
-  seleccionCama;
-  seleccionCapacidad;
-  seleccionExtras;
+   seleccion: Seleccion;
+
+   seleccionCategoria :string;
+   seleccionCama :string;
+   seleccionCapacidad :string;
+   seleccionExtras :string;
+  knobValues: {} = { upper: 1000, lower: 0 };
+
   private _hoteles: Hotel[] = [];
 
-  knobValues: {} = {
-    upper: 1000,
-    lower: 0
-  }
+
 
 
   constructor(public router: Router) {
     this._hoteles = new GeneradorHoteles().getHoteles();
+
     for (let index = 0; index < Object.keys(Categoria).length / 2; index++) {
       this._arrayCategoria.push(Categoria[index].toString());
     }
@@ -49,14 +51,14 @@ export class HomePage {
     }
   }
   public buscarHoteles() {
-    let seleccion: Seleccion = new Seleccion(this.seleccionCategoria, this.seleccionCama, this.seleccionCapacidad, this.seleccionExtras, []);
+    this.seleccion = new Seleccion(this.seleccionCategoria);
+    console.log(this.seleccion);
     let navigationExtras: NavigationExtras = {
       state: {
-        seleccion: seleccion,
+        seleccion: this.seleccion,
         hoteles: this._hoteles
       }
     }
-    console.log(this.seleccionCategoria);
     this.router.navigate(['resultado'], navigationExtras);
   }
   public get arrayCategoria() {
@@ -71,12 +73,9 @@ export class HomePage {
   public get arrayExtras() {
     return this._arrayExtras;
   }
-  public get maxSellable(): number {
-    return this._maxSellable;
-  }
-  public get precioMin(): number {
-    return this._precioMin;
-  }
+  
+  
+
 
 
 
