@@ -1,4 +1,3 @@
-import { Comparador } from './../core/model/comparador';
 import { GeneradorHoteles } from './../core/model/generador-hoteles';
 import { Hotel } from './../core/model/hotel';
 import { Injectable } from '@angular/core';
@@ -11,103 +10,65 @@ import { Seleccion } from '../core/model/seleccion';
      providedIn: 'root'
 })
 export class PeticionControllerService {
-     private habitacionMin: Habitacion;
-     private habitacionMax: Habitacion;
-     private puntuacion: Categoria;
-     private hoteles: Hotel[] = [];
-     private hotelesEnsenar: Hotel[] = [];
+     private _precioMinimo: Habitacion;
+     private _precioMax: Habitacion;
+     private _puntuacion: Categoria;
+     private _hoteles: Hotel[] = [];
+     private _mostrarHoteles: Hotel[] = [];
      constructor(public router: Router) {
-          this.hoteles = new GeneradorHoteles().getHoteles();
+          this._hoteles = new GeneradorHoteles().getHoteles();
      }
      lanzar() {
-          this.$hotelesEnsenar = new Seleccion(this.habitacionMin, this.habitacionMax, this.puntuacion, this.hoteles).comprobar();
+          this._mostrarHoteles = new Seleccion(this._precioMinimo, this._precioMax, this._puntuacion, this._hoteles).comprobar();
           let navigationExtras: NavigationExtras = {
                state: {
-                    hoteles: this.$hotelesEnsenar
+                    hoteles: this._mostrarHoteles
                }
           }
           this.router.navigate(['resultado'], navigationExtras);
      }
 
-     /**
-      * Getter $hotelesEnsenar
-      * @return {Hotel[] }
-      */
-     public get $hotelesEnsenar(): Hotel[] {
-          return this.hotelesEnsenar;
+     public get mostrarHoteles(): Hotel[] {
+          return this._mostrarHoteles;
      }
 
-     /**
-      * Setter $hotelesEnsenar
-      * @param {Hotel[] } value
-      */
-     public set $hotelesEnsenar(value: Hotel[]) {
-          this.hotelesEnsenar = value;
+   
+     public set mostrarHoteles(value: Hotel[]) {
+          this._mostrarHoteles = value;
      }
 
 
-     /**
-      * Getter $puntuacion
-      * @return {Puntuacion}
-      */
-     public get $puntuacion(): Categoria {
-          return this.puntuacion;
+    
+     public get puntuacion(): Categoria {
+          return this._puntuacion;
      }
 
-     /**
-      * Setter $puntuacion
-      * @param {Puntuacion} value
-      */
-     public set $puntuacion(value: Categoria) {
-          this.puntuacion = value;
+     public set puntuacion(value: Categoria) {
+          this._puntuacion = value;
      }
 
-     /**
-      * Getter $habitacionMin
-      * @return {Habitacion}
-      */
-     public get $habitacionMin(): Habitacion {
-          return this.habitacionMin;
+     public get precioMinimo(): Habitacion {
+          return this._precioMinimo;
      }
 
-     /**
-      * Getter $habitacionMax
-      * @return {Habitacion}
-      */
-     public get $habitacionMax(): Habitacion {
-          return this.habitacionMax;
+     public get precioMax(): Habitacion {
+          return this._precioMax;
      }
 
-     /**
-      * Getter $hoteles
-      * @return {Hotel[]}
-      */
-     public get $hoteles(): Hotel[] {
-          return this.hoteles;
+     public get hoteles(): Hotel[] {
+          return this._hoteles;
      }
 
-     /**
-      * Setter $habitacionMin
-      * @param {Habitacion} value
-      */
-     public set $habitacionMin(value: Habitacion) {
-          this.habitacionMin = value;
+     public set precioMin(value: Habitacion) {
+          this._precioMinimo = value;
      }
 
-     /**
-      * Setter $habitacionMax
-      * @param {Habitacion} value
-      */
-     public set $habitacionMax(value: Habitacion) {
-          this.habitacionMax = value;
+     public set precioMax(value: Habitacion) {
+          this._precioMax = value;
      }
 
-     /**
-      * Setter $hoteles
-      * @param {Hotel[]} value
-      */
-     public set $hoteles(value: Hotel[]) {
-          this.hoteles = value;
+     public set hoteles(value: Hotel[]) {
+          this._hoteles = value;
      }
 
 }

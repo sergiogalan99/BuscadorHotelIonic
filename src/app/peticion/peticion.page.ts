@@ -14,6 +14,19 @@ import { Complemento } from '../core/model/complemento';
   styleUrls: ['./peticion.page.scss'],
 })
 export class PeticionPage implements OnInit {
+  private _arrayCategoria = [];
+  private _arrayCama = [];
+  private _arrayCapacidad = [];
+  private _arrayExtras = [];
+  private _seleccionCategoria: string = "";
+  private _seleccionCama: string = "";
+  private _seleccionCapacidad: string = "";
+  private _extrasHtml = [];
+
+  knobValues = {
+    upper: 1000,
+    lower: 0
+  };
 
   constructor(public peticionService: PeticionControllerService) {
     for (let index = 0; index < Object.keys(Categoria).length / 2; index++) {
@@ -30,40 +43,14 @@ export class PeticionPage implements OnInit {
     }
   }
 
-  /**
-   * Getter $extrasHtml
-   * @return {boolean[] }
-   */
-  public get $extrasHtml() {
-    return this.extrasHtml;
+  public get seleccionCategoria(): string {
+    return this._seleccionCategoria;
   }
-
-  /**
-   * Setter $extrasHtml
-   * @param {boolean[] } value
-   */
-  public set $extrasHtml(value) {
-    this.extrasHtml = value;
+  public get seleccionCama(): string {
+    return this._seleccionCama;
   }
-
-
-  public get $seleccionCategoria(): string {
-    return this.seleccionCategoria;
-  }
-  public get $seleccionCama(): string {
-    return this.seleccionCama;
-  }
-  public get $seleccionCapacidad(): string {
-    return this.seleccionCapacidad;
-  }
-  public set $seleccionCategoria(value: string) {
-    this.seleccionCategoria = value;
-  }
-  public set $seleccionCama(value: string) {
-    this.seleccionCama = value;
-  }
-  public set $seleccionCapacidad(value: string) {
-    this.seleccionCapacidad = value;
+  public get seleccionCapacidad(): string {
+    return this._seleccionCapacidad;
   }
   public get arrayCategoria() {
     return this._arrayCategoria;
@@ -77,31 +64,30 @@ export class PeticionPage implements OnInit {
   public get arrayExtras() {
     return this._arrayExtras;
   }
-
-  private _arrayCategoria = [];
-  private _arrayCama = [];
-  private _arrayCapacidad = [];
-  private _arrayExtras = [];
-  private seleccionCategoria: string = "";
-  private seleccionCama: string = "";
-  private seleccionCapacidad: string = "";
-  private extrasHtml = [];
-
-  knobValues = {
-    upper: 1000,
-    lower: 0
-  };
-
+  public get extrasHtml() {
+    return this._extrasHtml;
+  }
+ 
+  public set seleccionCategoria(value: string) {
+    this._seleccionCategoria = value;
+  }
+  public set seleccionCama(value: string) {
+    this._seleccionCama = value;
+  }
+  public set seleccionCapacidad(value: string) {
+    this._seleccionCapacidad = value;
+  }
+  public set extrasHtml(value) {
+    this._extrasHtml = value;
+  }
   ngOnInit() {
-
 
   }
 
   public updatePriceLabels() {
-    console.log(this.extrasHtml)
-    this.peticionService.$habitacionMin = new Habitacion(new TipoHabitacion(Capacidad[this.$seleccionCapacidad], Camas[this.$seleccionCama], new Complemento(this.extrasHtml)), this.knobValues.lower,'');
-    this.peticionService.$habitacionMax = new Habitacion(new TipoHabitacion(Capacidad[this.$seleccionCapacidad], Camas[this.$seleccionCama], new Complemento(this.extrasHtml)), this.knobValues.upper,"");
-    this.peticionService.$puntuacion = Categoria[this.seleccionCategoria];
+    this.peticionService.precioMin = new Habitacion(new TipoHabitacion(Capacidad[this._seleccionCapacidad], Camas[this._seleccionCama], new Complemento(this._extrasHtml)), this.knobValues.lower,'');
+    this.peticionService.precioMax = new Habitacion(new TipoHabitacion(Capacidad[this._seleccionCapacidad], Camas[this._seleccionCama], new Complemento(this._extrasHtml)), this.knobValues.upper,"");
+    this.peticionService.puntuacion = Categoria[this._seleccionCategoria];
     this.peticionService.lanzar();
   }
 

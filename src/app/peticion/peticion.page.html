@@ -17,7 +17,7 @@
       <ion-label>Categoria</ion-label>
       <ion-select [(ngModel)]="seleccionCategoria" class="tamanoLetter">
         <ion-select-option value="">Seleciona</ion-select-option>
-        <ion-select-option *ngFor="let categoria of _arrayCategoria" value="{{arrayCategoria.indexOf(categoria)}}">
+        <ion-select-option *ngFor="let categoria of arrayCategoria" value="{{arrayCategoria.indexOf(categoria)}}">
           {{categoria}}</ion-select-option>
       </ion-select>
     </ion-item>
@@ -26,7 +26,7 @@
       <ion-label>Camas</ion-label>
       <ion-select [(ngModel)]="seleccionCama" class="tamanoLetter">
         <ion-select-option value="">Seleciona</ion-select-option>
-        <ion-select-option *ngFor="let camas of _arrayCama" value="{{arrayCategoria.indexOf(camas)}}">{{camas}}
+        <ion-select-option *ngFor="let camas of arrayCama" value="{{arrayCategoria.indexOf(camas)}}">{{camas}}
         </ion-select-option>
       </ion-select>
     </ion-item>

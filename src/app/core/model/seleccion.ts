@@ -6,53 +6,55 @@ import { Habitacion } from './habitacion';
 import { Hotel } from './hotel';
 
 export class Seleccion {
-    private habitacionMin: Habitacion;
-    private habitacionMax: Habitacion;
-    private puntuacion: Categoria;
-    private hoteles: Hotel[] = [];
-    private hotelesEnsenar: Hotel[] = [];
-    private ensenarHabitacion: Habitacion[] = [];
+    private _precioMin: Habitacion;
+    private _precioMax: Habitacion;
+    private _puntuacion: Categoria;
+    private _hoteles: Hotel[] = [];
+    private _mostrarHoteles: Hotel[] = [];
+    private _mostarHabitaciones: Habitacion[] = [];
 
-    constructor($habitacionMin: Habitacion, $habitacionMax: Habitacion, $puntuacion: Categoria, $hoteles: Hotel[]) {
-        this.habitacionMin = $habitacionMin;
-        this.habitacionMax = $habitacionMax;
-        this.puntuacion = $puntuacion;
-        this.hoteles = $hoteles;
-    }
 
+	constructor(precioMin: Habitacion, precioMax: Habitacion, puntuacion: Categoria, hoteles: Hotel[]) {
+		this._precioMin = precioMin;
+		this._precioMax = precioMax;
+		this._puntuacion = puntuacion;
+		this._hoteles = hoteles;
+
+	}
+   
     comprobar() {
-        this.$hotelesEnsenar = [];
+        this._mostrarHoteles = [];
         this.comprobarCategoria();
-        return this.$hotelesEnsenar;
+        return this._mostrarHoteles;
     }
 
     private comprobarCategoria() {
-        // tslint:disable-next-line:no-conditional-assignment
-        if (undefined != this.puntuacion) {
-            this.hoteles = this.hoteles.filter(hotel => this.puntuacion === hotel.categoria);
+       
+        if (undefined != this._puntuacion) {
+            this._hoteles = this._hoteles.filter(hotel => this._puntuacion === hotel.categoria);
         }
-        this.hoteles.forEach(element => {
-            this.$ensenarHabitacion = [];
-            this.$ensenarHabitacion = element.tiposHabitacion.filter(habitacion => this.habitacionMax.precio > habitacion.precio && this.$habitacionMin.precio < habitacion.precio);
-            if (this.$habitacionMax.tipoHabitacion.camas != undefined) {
-                this.$ensenarHabitacion = element.tiposHabitacion.filter(habitacion => this.habitacionMax.tipoHabitacion.camas === habitacion.tipoHabitacion.camas);
+        this._hoteles.forEach(element => {
+            this._mostarHabitaciones = [];
+            this._mostarHabitaciones = element.tiposHabitacion.filter(habitacion => this._precioMax.precio > habitacion.precio && this._precioMin.precio < habitacion.precio);
+            if (this._precioMax.tipoHabitacion.camas != undefined) {
+                this._mostarHabitaciones = element.tiposHabitacion.filter(habitacion => this._precioMax.tipoHabitacion.camas === habitacion.tipoHabitacion.camas);
             }
-            if (this.$habitacionMax.tipoHabitacion.capacidad != undefined) {
-                this.$ensenarHabitacion = element.tiposHabitacion.filter(habitacion => this.habitacionMax.tipoHabitacion.capacidad === habitacion.tipoHabitacion.capacidad);
+            if (this._precioMax.tipoHabitacion.capacidad != undefined) {
+                this._mostarHabitaciones = element.tiposHabitacion.filter(habitacion => this._precioMax.tipoHabitacion.capacidad === habitacion.tipoHabitacion.capacidad);
             }
-            if (this.$ensenarHabitacion.length != 0) {
-                this.$hotelesEnsenar.push(new Hotel(element.nombre, element.categoria, this.$ensenarHabitacion));
+            if (this._mostarHabitaciones.length != 0) {
+                this._mostrarHoteles.push(new Hotel(element.nombre, element.categoria, this._mostarHabitaciones));
             }
         });
 
     }
 
     private comprobarExtras(habitacion: Habitacion) {
-        if (this.habitacionMax.tipoHabitacion.complementos.nombre.length === 0) {
-            this.$ensenarHabitacion.push(habitacion);
+        if (this._precioMax.tipoHabitacion.complementos.nombre.length === 0) {
+            this._mostarHabitaciones.push(habitacion);
         } else {
             let arrayExtras = habitacion.tipoHabitacion.complementos.nombre;
-            let arrayPeticion = this.habitacionMax.tipoHabitacion.complementos.nombre;
+            let arrayPeticion = this._precioMax.tipoHabitacion.complementos.nombre;
             let contador = 0;
             for (let index = 0; index < arrayPeticion.length; index++) {
                 for (let indexDos = 0; indexDos < arrayExtras.length; indexDos++) {
@@ -63,106 +65,65 @@ export class Seleccion {
             }
 
             if (contador >= 1 && contador >= arrayPeticion.length) {
-                this.$ensenarHabitacion.push(habitacion)
+                this._mostarHabitaciones.push(habitacion)
 
             }
         }
     }
 
-    /**
-     * Getter $habitacionMin
-     * @return {Habitacion}
-     */
-    public get $habitacionMin(): Habitacion {
-        return this.habitacionMin;
+ 
+    public get precioMin(): Habitacion {
+        return this._precioMin;
     }
 
-    /**
-     * Getter $habitacionMax
-     * @return {Habitacion}
-     */
-    public get $habitacionMax(): Habitacion {
-        return this.habitacionMax;
+  
+    public get precioMax(): Habitacion {
+        return this._precioMax;
     }
 
-    /**
-     * Getter $puntuacion
-     * @return {Categoria}
-     */
-    public get $puntuacion(): Categoria {
-        return this.puntuacion;
+    public get puntuacion(): Categoria {
+        return this._puntuacion;
     }
 
-    /**
-     * Getter $hoteles
-     * @return {Hotel[] }
-     */
-    public get $hoteles(): Hotel[] {
-        return this.hoteles;
+    public get hoteles(): Hotel[] {
+        return this._hoteles;
     }
 
-    /**
-     * Getter $hotelesEnsenar
-     * @return {Hotel[] }
-     */
-    public get $hotelesEnsenar(): Hotel[] {
-        return this.hotelesEnsenar;
+    public get mostarHoteles(): Hotel[] {
+        return this._mostrarHoteles;
     }
 
-    /**
-     * Getter $ensenarHabitacion
-     * @return {Habitacion[] }
-     */
-    public get $ensenarHabitacion(): Habitacion[] {
-        return this.ensenarHabitacion;
+ 
+    public get mostarHabitaciones(): Habitacion[] {
+        return this._mostarHabitaciones;
     }
 
-    /**
-     * Setter $habitacionMin
-     * @param {Habitacion} value
-     */
-    public set $habitacionMin(value: Habitacion) {
-        this.habitacionMin = value;
+    public set precioMin(value: Habitacion) {
+        this._precioMin = value;
     }
 
-    /**
-     * Setter $habitacionMax
-     * @param {Habitacion} value
-     */
-    public set $habitacionMax(value: Habitacion) {
-        this.habitacionMax = value;
+  
+    public set precioMax(value: Habitacion) {
+        this._precioMax = value;
     }
 
-    /**
-     * Setter $puntuacion
-     * @param {Categoria} value
-     */
-    public set $puntuacion(value: Categoria) {
-        this.puntuacion = value;
+    public set puntuacion(value: Categoria) {
+        this._puntuacion = value;
     }
 
-    /**
-     * Setter $hoteles
-     * @param {Hotel[] } value
-     */
-    public set $hoteles(value: Hotel[]) {
-        this.hoteles = value;
+  
+    public set hoteles(value: Hotel[]) {
+        this._hoteles = value;
     }
 
-    /**
-     * Setter $hotelesEnsenar
-     * @param {Hotel[] } value
-     */
-    public set $hotelesEnsenar(value: Hotel[]) {
-        this.hotelesEnsenar = value;
+  
+    public set mostrarHoteles(value: Hotel[]) {
+        this._mostrarHoteles = value;
     }
 
-    /**
-     * Setter $ensenarHabitacion
-     * @param {Habitacion[] } value
-     */
-    public set $ensenarHabitacion(value: Habitacion[]) {
-        this.ensenarHabitacion = value;
+   
+    public set mostarHabitaciones(value: Habitacion[]) {
+        this._mostarHabitaciones = value;
     }
 
 
