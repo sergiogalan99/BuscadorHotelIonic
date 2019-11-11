@@ -4,6 +4,8 @@ import { Hotel } from './../core/model/hotel';
 import { Injectable } from '@angular/core';
 import { Habitacion } from '../core/model/habitacion';
 import { Categoria } from '../core/model/categoria';
+import { NavigationExtras, Router } from '@angular/router';
+import { Seleccion } from '../core/model/seleccion';
 
 @Injectable({
      providedIn: 'root'
@@ -14,11 +16,17 @@ export class PeticionControllerService {
      private puntuacion: Categoria;
      private hoteles: Hotel[] = [];
      private hotelesEnsenar: Hotel[] = [];
-     constructor() {
+     constructor(public router: Router) {
           this.hoteles = new GeneradorHoteles().getHoteles();
      }
      lanzar() {
-          this.$hotelesEnsenar = new Comparador(this.habitacionMin, this.habitacionMax, this.puntuacion, this.hoteles).comprobar();
+          this.$hotelesEnsenar = new Seleccion(this.habitacionMin, this.habitacionMax, this.puntuacion, this.hoteles).comprobar();
+          let navigationExtras: NavigationExtras = {
+               state: {
+                    hoteles: this.$hotelesEnsenar
+               }
+          }
+          this.router.navigate(['resultado'], navigationExtras);
      }
 
      /**

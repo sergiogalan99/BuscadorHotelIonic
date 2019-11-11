@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Hotel } from '../core/model/hotel';
 import { Habitacion } from '../core/model/habitacion';
+import { PeticionControllerService } from '../shared/peticion-controller.service';
 
 @Component({
   selector: 'app-resultado',
@@ -17,20 +18,18 @@ export class ResultadoPage implements OnInit {
   public _seleccion: Seleccion;
   public _arrayHoteles: Hotel[];
   private _arrayHabitacion: Habitacion[];
-  
+  private result
 
 
 
-  constructor(private router: Router) {
 
-    this._seleccion = this.router.getCurrentNavigation().extras.state.seleccion;
+  constructor(public router: Router, public peticionService: PeticionControllerService) {
+
     this._arrayHoteles = this.router.getCurrentNavigation().extras.state.hoteles;
-    console.log(this._arrayHoteles);
-    this.seleccionDebug = JSON.stringify(this._seleccion);
-   
-    /*const result = this._arrayHabitacion.filter(habitacion => habitacion.tipoHabitacion.capacidad === this._seleccion.capacidad);
-    console.log(result);*/
-   
+    // console.log(this._arrayHoteles[0].categoria);
+    // this.result = this._arrayHoteles.filter(habitacion =>  habitacion.categoria === this._seleccion.categoria);
+    // console.log(this.result);
+
 
 
   }
