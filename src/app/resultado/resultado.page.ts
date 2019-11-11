@@ -52,19 +52,4 @@ export class ResultadoPage implements OnInit {
   public get arrayHoteles() {
     return this._arrayHoteles;
   }
-  private shouldPushInArray(item, filter) {
-    if (typeof filter !== 'string') {
-      item = item.toString();
-      filter = filter.toString();
-    }
-
-    // Filter main logic
-    item = item.toLowerCase();
-    filter = filter.toLowerCase();
-    if (item.indexOf(filter) !== -1) {
-      return true;
-    }
-    return false;
-  }
-
 }
