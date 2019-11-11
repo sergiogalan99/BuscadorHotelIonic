@@ -1,9 +1,68 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>peticion</ion-title>
+    <ion-title>
+      <img class="imagen"
+        src="https://de1f1l5l72ecp.cloudfront.net/awin/image/upload/q_80,w_940,h_660,c_fit/v1488559049/awin-website/case-studies/image/p2vts1tc3vy9402y52fc.png">
+    </ion-title>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+
+  <ion-list class="tamanoLetter">
+
+    <ion-item>
+      <ion-label>Categoria</ion-label>
+      <ion-select [(ngModel)]="seleccionCategoria" class="tamanoLetter">
+        <ion-select-option value="">Seleciona</ion-select-option>
+        <ion-select-option *ngFor="let categoria of _arrayCategoria" value="{{arrayCategoria.indexOf(categoria)}}">
+          {{categoria}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Camas</ion-label>
+      <ion-select [(ngModel)]="seleccionCama" class="tamanoLetter">
+        <ion-select-option value="">Seleciona</ion-select-option>
+        <ion-select-option *ngFor="let camas of _arrayCama" value="{{arrayCategoria.indexOf(camas)}}">{{camas}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Capacidad</ion-label>
+      <ion-select [(ngModel)]="seleccionCapacidad" class="tamanoLetter">
+        <ion-select-option value="">Seleciona</ion-select-option>
+        <ion-select-option *ngFor="let capacidad of arrayCapacidad" value="{{arrayCategoria.indexOf(capacidad)}}"> 
+          {{capacidad}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Extras</ion-label>
+      <ion-select [(ngModel)]="extrasHtml" multiple="true" class="tamanoLetter">
+        <ion-select-option *ngFor="let extras of arrayExtras" value="{{extras}}">{{extras}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Precio </ion-label>
+      <ion-range class="tamanoLetter" dual-knobs="true" pin="true" min="0" max="1000" [(ngModel)]="knobValues">
+        <ion-label class="tamanoLetter" slot="start">{{knobValues.lower}}</ion-label>
+        <ion-label class="tamanoLetter" slot="end">{{knobValues.upper}}</ion-label>
+      </ion-range>
+    </ion-item>
+
+
+
+
+  </ion-list>
+  <br>
+  <ion-button expand="block" (click)="updatePriceLabels()">BUSCAR</ion-button>
+  <br><br><br>
+  <ion-footer class="labelFooter">Sergio Galán y David Arias</ion-footer>
 </ion-content>
