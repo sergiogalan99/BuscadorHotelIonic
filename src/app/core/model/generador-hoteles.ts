@@ -34,7 +34,7 @@ export class GeneradorHoteles {
 
     public obtenerCategoria(): Categoria {
         let categoria;
-        let numeroEstrellas = this.getRandom(0, 4);
+        let numeroEstrellas = this.getRandom(1, 5);
         categoria = Categoria[numeroEstrellas];
         return categoria;
 

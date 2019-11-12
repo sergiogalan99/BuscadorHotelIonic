@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'peticion', pathMatch: 'full' },
   { path: 'peticion', loadChildren: () => import('./peticion/peticion.module').then( m => m.PeticionPageModule)},
   { path: 'resultado', loadChildren: './resultado/resultado.module#ResultadoPageModule' },
+  { path: 'habitacion', loadChildren: './habitacion/habitacion.module#HabitacionPageModule' },
 
 ];
 

@@ -1,23 +1,28 @@
+
 <ion-header>
   <ion-toolbar>
     <ion-title>
       <img class="imagen"
         src="https://de1f1l5l72ecp.cloudfront.net/awin/image/upload/q_80,w_940,h_660,c_fit/v1488559049/awin-website/case-studies/image/p2vts1tc3vy9402y52fc.png">
-    </ion-title>
+       
+      </ion-title>
+   
 
   </ion-toolbar>
+ 
 </ion-header>
 
-<ion-content>
+<ion-content> 
 
+   
 
   <ion-list class="tamanoLetter">
-
-    <ion-item>
-      <ion-label>Categoria</ion-label>
+    
+    <ion-item >
+      <ion-label >Categoria</ion-label>
       <ion-select [(ngModel)]="seleccionCategoria" class="tamanoLetter">
-        <ion-select-option value="">Seleciona</ion-select-option>
-        <ion-select-option *ngFor="let categoria of arrayCategoria" value="{{arrayCategoria.indexOf(categoria)}}">
+        
+        <ion-select-option *ngFor="let categoria of arrayCategoria" value="{{categoria}}">
           {{categoria}}</ion-select-option>
       </ion-select>
     </ion-item>
@@ -26,7 +31,7 @@
       <ion-label>Camas</ion-label>
       <ion-select [(ngModel)]="seleccionCama" class="tamanoLetter">
         <ion-select-option value="">Seleciona</ion-select-option>
-        <ion-select-option *ngFor="let camas of arrayCama" value="{{arrayCategoria.indexOf(camas)}}">{{camas}}
+        <ion-select-option *ngFor="let camas of arrayCama" value="{{camas}}">{{camas}}
         </ion-select-option>
       </ion-select>
     </ion-item>
@@ -34,8 +39,8 @@
     <ion-item>
       <ion-label>Capacidad</ion-label>
       <ion-select [(ngModel)]="seleccionCapacidad" class="tamanoLetter">
-        <ion-select-option value="">Seleciona</ion-select-option>
-        <ion-select-option *ngFor="let capacidad of arrayCapacidad" value="{{arrayCategoria.indexOf(capacidad)}}"> 
+        <ion-select-option value="">Selecciona</ion-select-option>
+        <ion-select-option *ngFor="let capacidad of arrayCapacidad" value="{{capacidad}}"> 
           {{capacidad}}</ion-select-option>
       </ion-select>
     </ion-item>
@@ -62,7 +67,7 @@
 
   </ion-list>
   <br>
-  <ion-button expand="block" (click)="updatePriceLabels()">BUSCAR</ion-button>
+  <ion-button expand="block" (click)="buscarHotel()">BUSCAR</ion-button>
   <br><br><br>
   <ion-footer class="labelFooter">Sergio Galán y David Arias</ion-footer>
 </ion-content>

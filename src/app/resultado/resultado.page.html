@@ -1,14 +1,15 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>resultado</ion-title>
+    <ion-button routerLink="/peticion">
+      <ion-icon slot="start" name="arrow-back"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-button routerLink="/peticion">
-    <ion-icon slot="start" name="arrow-back"></ion-icon>
-  </ion-button>
+ 
 
   <ion-card class="cardHoteles" *ngFor="let hoteles of arrayHoteles">
 
@@ -22,9 +23,14 @@
     <ion-card-content *ngFor="let habitacion of hoteles.tiposHabitacion">
 
       <img class="imagenHabitacion" src="{{habitacion.imagen}}">
+      <h3>Precio: {{habitacion.precio}} €</h3>
+      <h3>Camas: {{habitacion.tipoHabitacion.camas}}</h3>
+      <h3>Capacidad: {{habitacion.tipoHabitacion.capacidad}}</h3>
+
 
     </ion-card-content>
-    <ion-button fill="outline">View</ion-button>
+  
+    <ion-button routerLink="/habitacion" fill="outline">View</ion-button>
   </ion-card>
 
 
